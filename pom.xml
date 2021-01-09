@@ -18,6 +18,7 @@
         <module>cloud-consumer-order81-zk</module>
         <module>cloud-provider-payment8006-consul</module>
         <module>cloud-consumer-order82-consul</module>
+        <module>cloud-consumer-order83-openFeign</module>
     </modules>
     <packaging>pom</packaging>
 
