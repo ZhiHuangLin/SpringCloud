@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wecon.springcloud.dao.EmployeeDao">
+
+    <resultMap id="BaseResultMap" type="com.wecon.springcloud.entities.Employee">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <id column="name" property="name" jdbcType="VARCHAR"/>
+        <id column="sex" property="sex" jdbcType="VARCHAR"/>
+        <id column="age" property="age" jdbcType="BIGINT"/>
+        <id column="joinUsDate" property="joinUsDate" jdbcType="DATE"/>
+        <id column="salary" property="salary" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <insert id="addEmployee" parameterType="com.wecon.springcloud.entities.Employee" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO Employee(id,name,sex,age,joinUsDate,salary)
+         VALUES (#{id},#{name},#{sex},#{age},#{joinUsDate},#{salary})
+    </insert>
+    <delete id="deleteEmployee" parameterType="long" >
+    DELETE FROM Employee WHERE id = #{id}
+    </delete>
+
+    <update id="updateEmployee" parameterType="com.wecon.springcloud.entities.Employee" >
+     UPDATE Employee
+        SET Employee.name = #{name},
+            Employee.sex = #{sex},
+            Employee.age = #{age},
+            Employee.joinUsDate = #{joinUsDate},
+            Employee.salary = #{salary}
+      WHERE Employee.id = #{id}
+    </update>
+
+    <select id="getEmployee" parameterType="long" resultMap="BaseResultMap">
+        SELECT * FROM Employee WHERE id=#{id}
+    </select>
+
+</mapper>
