@@ -18,25 +18,45 @@ public class Employee {
     /**
      * 员工号
      */
-    private Long id;
+    private Long employee_id;
     /**
-     * 姓名
+     * 员工姓名
      */
     private String name;
     /**
-     * 性别
+     * 年龄
+     */
+    private Long age;
+    /**
+     * 邮箱
      */
     private String sex;
     /**
-     * 年龄
+     * 邮箱
      */
-    private Integer age;
+    private String email;
+    /**
+     * 电话号码
+     */
+    private String phone_number;
     /**
      * 入职日期
      */
     private Date joinUsDate;
     /**
-     * 薪资
+     * 工种号
+     */
+    private Long job_id;
+    /**
+     * 薪水
      */
     private Long salary;
+    /**
+     * 部门号
+     */
+    private Long department_id;
+    /**
+     * 管理号
+     */
+    private Long manager_id;
 }

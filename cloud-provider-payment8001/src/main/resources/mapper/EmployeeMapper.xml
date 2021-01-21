@@ -1,37 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.wecon.springcloud.dao.EmployeeDao">
+    <mapper namespace="com.wecon.springcloud.dao.EmployeeDao">
 
-    <resultMap id="BaseResultMap" type="com.wecon.springcloud.entities.Employee">
-        <id column="id" property="id" jdbcType="BIGINT"/>
+    <resultMap id="EmployeeMap" type="com.wecon.springcloud.entities.Employee">
+        <id column="employee_id" property="employee_id" jdbcType="BIGINT"/>
         <id column="name" property="name" jdbcType="VARCHAR"/>
-        <id column="sex" property="sex" jdbcType="VARCHAR"/>
         <id column="age" property="age" jdbcType="BIGINT"/>
+        <id column="sex" property="sex" jdbcType="VARCHAR"/>
+        <id column="email" property="email" jdbcType="VARCHAR"/>
+        <id column="phone_number" property="phone_number" jdbcType="VARCHAR"/>
         <id column="joinUsDate" property="joinUsDate" jdbcType="DATE"/>
+        <id column="job_id" property="job_id" jdbcType="VARCHAR"/>
         <id column="salary" property="salary" jdbcType="BIGINT"/>
+        <id column="department_id" property="department_id" jdbcType="BIGINT"/>
+        <id column="manager_id" property="manager_id" jdbcType="BIGINT"/>
     </resultMap>
 
-    <insert id="addEmployee" parameterType="com.wecon.springcloud.entities.Employee" useGeneratedKeys="true" keyProperty="id">
-    INSERT INTO Employee(id,name,sex,age,joinUsDate,salary)
-         VALUES (#{id},#{name},#{sex},#{age},#{joinUsDate},#{salary})
+    <resultMap id="DepartmentMap" type="com.wecon.springcloud.entities.Department">
+        <id column="department_id" property="department_id" jdbcType="BIGINT"/>
+        <id column="department_name" property="department_name" jdbcType="VARCHAR"/>
+        <id column="manager_id" property="manager_id" jdbcType="BIGINT"/>
+        <id column="location_id" property="location_id" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <insert id="addEmployee" parameterType="com.wecon.springcloud.entities.Employee" useGeneratedKeys="true" keyProperty="employee_id">
+    INSERT INTO Employee(employee_id,name,age,sex,email,phone_number,joinUsDate,job_id,salary,department_id,manager_id)
+         VALUES (#{employee_id},#{name},#{age},#{sex},#{email},#{phone_number},#{joinUsDate},#{job_id},#{salary},#{department_id},#{manager_id})
     </insert>
     <delete id="deleteEmployee" parameterType="long" >
-    DELETE FROM Employee WHERE id = #{id}
+    DELETE FROM Employee WHERE employee_id = #{employee_id}
     </delete>
 
     <update id="updateEmployee" parameterType="com.wecon.springcloud.entities.Employee" >
      UPDATE Employee
         SET Employee.name = #{name},
-            Employee.sex = #{sex},
             Employee.age = #{age},
+            Employee.sex = #{sex},
+            Employee.email = #{email},
+            Employee.salary = #{salary},
+            Employee.phone_number = #{phone_number},
             Employee.joinUsDate = #{joinUsDate},
-            Employee.salary = #{salary}
-      WHERE Employee.id = #{id}
+            Employee.job_id = #{job_id},
+            Employee.salary = #{salary},
+            Employee.department_id = #{department_id},
+            Employee.manager_id = #{manager_id}
+      WHERE Employee.employee_id = #{employee_id}
     </update>
 
-    <select id="getEmployee" parameterType="long" resultMap="BaseResultMap">
-        SELECT * FROM Employee WHERE id=#{id}
+    <select id="getEmployee" parameterType="long" resultMap="EmployeeMap">
+        SELECT * FROM Employee WHERE employee_id=#{employee_id}
+    </select>
+
+    <select id="queryLAWD" resultMap="DepartmentMap">
+        SELECT d.*
+	    FROM department d
+	    WHERE d.`department_id` = (
+			SELECT department_id FROM(
+				SELECT department_id,CAST(AVG(salary) AS DECIMAL(10,2)) AS avg_salary
+				FROM employee
+				GROUP BY department_id
+				HAVING avg_salary=(
+						SELECT MIN(avg_salary)
+						FROM (
+								SELECT CAST(AVG(salary) AS DECIMAL(10,2)) AS avg_salary,department_id
+								FROM employee
+								GROUP BY department_id
+						) ag_dep
+				)
+			) ag_dep_id
+	    );
+    </select>
+
+    <select id="queryLAWDByBetterSQL" resultMap="DepartmentMap">
+        SELECT *
+        FROM department
+        WHERE department_id=(
+            SELECT department_id
+            FROM employee
+            GROUP BY department_id
+            ORDER BY AVG(salary)
+            LIMIT 1
+        );
     </select>
 
 </mapper>

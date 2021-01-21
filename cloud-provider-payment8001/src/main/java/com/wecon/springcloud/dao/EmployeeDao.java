@@ -1,5 +1,6 @@
 package com.wecon.springcloud.dao;
 
+import com.wecon.springcloud.entities.Department;
 import com.wecon.springcloud.entities.Employee;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -39,4 +40,19 @@ public interface EmployeeDao {
      * @return
      */
     Employee getEmployee(Long id);
+
+    /**
+     * 查询平均工资最低的部门LAWD（Lowest Average Wage Department）信息
+     * @return
+     */
+    Department queryLAWD();
+
+    /**
+     * 查询平均工资最低的部门LAWD（Lowest Average Wage Department）信息用更好的SQL
+     * @return
+     */
+    Department queryLAWDByBetterSQL();
+
+
+
 }

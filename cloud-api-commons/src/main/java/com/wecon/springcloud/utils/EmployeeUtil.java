@@ -12,8 +12,14 @@ import java.util.Random;
 public class EmployeeUtil {
 
     private static String sex = null;
+    /**
+     * 姓名和性别
+     */
     private static String[] sexAndName = new String[2];
-
+    /**
+     * 随机生成姓名男女比例指数临界点
+     */
+    private static final int POINT = 2;
     /**
      * 随机产生名字
      * @return
@@ -26,34 +32,41 @@ public class EmployeeUtil {
                 "罗", "毕", "郝", "邬", "安", "常", "乐", "于", "时", "傅", "皮", "卞", "齐", "康", "伍", "余", "元", "卜", "顾", "孟", "平", "黄", "和",
                 "穆", "萧", "尹", "姚", "邵", "湛", "汪", "祁", "毛", "禹", "狄", "米", "贝", "明", "臧", "计", "伏", "成", "戴", "谈", "宋", "茅", "庞", "熊", "纪", "舒",
                 "屈", "项", "祝", "董", "梁", "杜", "阮", "蓝", "闵", "席", "季"};
-        String girl = "秀娟英华慧巧美娜静淑惠珠翠雅芝玉萍红娥玲芬芳燕彩春菊兰凤洁梅琳素云莲真环雪荣爱妹霞香月莺媛艳瑞凡佳嘉琼勤珍贞莉桂娣叶璧璐娅琦晶妍茜秋珊莎锦黛青倩婷姣婉娴瑾颖露瑶怡婵雁蓓纨仪荷丹蓉眉君琴蕊薇菁梦岚苑婕馨瑗琰韵融园艺咏卿聪澜纯毓悦昭冰爽琬茗羽希宁欣飘育滢馥筠柔竹霭凝晓欢霄枫芸菲寒伊亚宜可姬舒影荔枝思丽 ";
-        String boy = "伟刚勇毅俊峰强军平保东文辉力明永健世广志义兴良海山仁波宁贵福生龙元全国胜学祥才发武新利清飞彬富顺信子杰涛昌成康星光天达安岩中茂进林有坚和彪博诚先敬震振壮会思群豪心邦承乐绍功松善厚庆磊民友裕河哲江超浩亮政谦亨奇固之轮翰朗伯宏言若鸣朋斌梁栋维启克伦翔旭鹏泽晨辰士以建家致树炎德行时泰盛雄琛钧冠策腾楠榕风航弘";
+        String girl = "秀娟英华慧巧美娜静淑惠珠翠雅芝玉萍红娥玲芬芳燕彩春菊兰凤洁梅琳素云莲真环雪荣爱妹霞香月莺媛艳瑞凡佳嘉琼勤珍贞莉桂娣叶璧璐娅琦晶妍茜秋珊莎锦黛青倩婷姣婉娴瑾颖露瑶" +
+                "怡婵雁蓓纨仪荷丹蓉眉君琴蕊薇菁梦岚苑婕馨瑗琰韵融园艺咏卿聪澜纯毓悦昭冰爽琬茗羽希宁欣飘育滢馥筠柔竹霭凝晓欢霄枫芸菲寒伊亚宜可姬舒影荔枝思丽 ";
+        String boy = "伟刚勇毅俊峰强军平保东文辉力明永健世广志义兴良海山仁波宁贵福生龙元全国胜学祥才发武新利清飞彬富顺信子杰涛昌成康星光天达安岩中茂进林有坚和彪博诚先敬震振壮会思群豪心" +
+                "邦承乐绍功松善厚庆磊民友裕河哲江超浩亮政谦亨奇固之轮翰朗伯宏言若鸣朋斌梁栋维启克伦翔旭鹏泽晨辰士以建家致树炎德行时泰盛雄琛钧冠策腾楠榕风航弘";
         int index = random.nextInt(Surname.length - 1);
-        String name = Surname[index]; //获得一个随机的姓氏
-        int i = random.nextInt(3);//可以根据这个数设置产生的男女比例
-        if(i==2){
+        //获得一个随机的姓氏
+        String name = Surname[index];
+        //可以根据这个数设置产生的男女比例
+        int i = random.nextInt(3);
+        if(i == POINT){
             sex = "女";
-            int j = random.nextInt(girl.length()-2);
-            if (j % 2 == 0) {
-                name = name + girl.substring(j, j + 2);
-            } else {
-                name = name + girl.substring(j, j + 1);
-            }
-            sexAndName[0] = name;
-            sexAndName[1] = sex;
+            randomSexAndName(random, girl, name);
         }
         else{
             sex = "男";
-            int j = random.nextInt(girl.length()-2);
-            if (j % 2 == 0) {
-                name = name + boy.substring(j, j + 2);
-            } else {
-                name = name + boy.substring(j, j + 1);
-            }
-            sexAndName[0] = name;
-            sexAndName[1] = sex;
+            randomSexAndName(random, boy, name);
         }
         return sexAndName;
+    }
+
+    /**
+     * 随机生成组合性别和年龄（公共代码抽取）
+     * @param random
+     * @param boy
+     * @param name
+     */
+    private static void randomSexAndName(Random random, String boy, String name) {
+        int j = random.nextInt(boy.length() - 2);
+        if (j % POINT == 0) {
+            name = name + boy.substring(j, j + 2);
+        } else {
+            name = name + boy.substring(j, j + 1);
+        }
+        sexAndName[0] = name;
+        sexAndName[1] = sex;
     }
 
     /**
@@ -81,14 +94,15 @@ public class EmployeeUtil {
     public static Date randomDate(String beginDate, String endDate) {
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            Date start = format.parse(beginDate);// 构造开始日期
-            Date end = format.parse(endDate);// 构造结束日期
+            // 构造开始日期
+            Date start = format.parse(beginDate);
+            // 构造结束日期
+            Date end = format.parse(endDate);
             // getTime()表示返回自 1970 年 1 月 1 日 00:00:00 GMT 以来此 Date 对象表示的毫秒数。
             if (start.getTime() >= end.getTime()) {
                 return null;
             }
             long date = random(start.getTime(), end.getTime());
-
             return new Date(date);
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,5 +124,43 @@ public class EmployeeUtil {
         }
         return rtn;
     }
+
+    /**
+     * 随机产生邮箱
+     * @return
+     */
+    public static String getEmail() {
+        return (long)new Random().nextInt(10000000) + 19999999 +"@qq.com";
+    }
+
+    /**
+     * 随机产生电话号码
+     * @return
+     */
+    public static String getPhone_number() {
+        return (long)new Random().nextInt(1800000000) + 189999999 +"";
+    }
+
+
+    /**
+     * 随机产生电话号码和职位编号
+     * @return
+     */
+    public static Long getDepartmentAndJob_id() {
+        Long [] arr = {(long)10,(long)20,(long)30,(long)40,(long)50,(long)60,(long)70,(long)80,(long)90,(long)100,
+                (long)110,(long)120,(long)130,(long)140,(long)150,(long)160,(long)170,(long)180,(long)190,(long)200,
+                (long)210,(long)220,(long)220,(long)230,(long)240,(long)250,(long)260,(long)270};
+        int index=(int)(Math.random()*arr.length);
+        return arr[index];
+    }
+
+    /**
+     * 随机管理员id
+     * @return
+     */
+    public static Long getManager_id() {
+        return (long)new Random().nextInt(10000) + 19999;
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.wecon.springcloud.service.impl;
 
+import com.wecon.springcloud.entities.Department;
 import com.wecon.springcloud.entities.Employee;
 import com.wecon.springcloud.dao.EmployeeDao;
 import com.wecon.springcloud.service.EmployeeService;
@@ -36,4 +37,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee getEmployee(Long id) {
         return employeeDao.getEmployee(id);
     }
+
+    @Override
+    public Department queryLAWD() {
+        return employeeDao.queryLAWD();
+    }
+
+    @Override
+    public Department queryLAWDByBetterSQL() {
+        return employeeDao.queryLAWDByBetterSQL();
+    }
+
 }

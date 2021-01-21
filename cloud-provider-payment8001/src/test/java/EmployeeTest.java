@@ -1,4 +1,6 @@
 import com.wecon.springcloud.PaymentMain8001;
+import com.wecon.springcloud.entities.CommonResult;
+import com.wecon.springcloud.entities.Department;
 import com.wecon.springcloud.entities.Employee;
 import com.wecon.springcloud.controller.EmployeeController;
 import com.wecon.springcloud.service.EmployeeService;
@@ -34,19 +36,20 @@ public class EmployeeTest {
     Long salary = Long.valueOf(3000);
     Date date = new Date();
     Timestamp timeStamp = new Timestamp(date.getTime());
-    Employee JackMa = new Employee( (long) ((Math.random() * 100000) % 100),"JackMa","男",18,timeStamp,Long.valueOf(3000));
-    Employee JackMa1 = new Employee( (long) ((Math.random() * 100000) % 100),"JackMa","男",28,timeStamp,Long.valueOf(3000));
+    Employee JackMa = new Employee((long)15155,"lucy",(long)18,"女","13466585@qq.com","1862545625",timeStamp,(long)10110,(long)152323,(long)30,(long)485);
+    Employee JackMa1 = new Employee((long)15155,"JackMa",(long)18,"男","13466585@qq.com","1862545625",timeStamp,(long)10100,(long)152323,(long)20,(long)485);
+//    Employee JackMa1 = new Employee( (long) ((Math.random() * 100000) % 100),"JackMa","男",28,timeStamp,Long.valueOf(3000));
 
     @Test
     public void testGetEmployee(){
-        Employee employee = employeeService.getEmployee(employeeNumber);
+        Employee employee = employeeService.getEmployee((long) 15155);
         if(employee != null ){
             log.info("查询成功！返回"+employee);
         }else{
             log.error("查询失败！不存在此数据或出现错误！");
         }
     }
-    @Test
+   @Test
     public void testAddEmployee(){
         long result = employeeService.addEmployee(JackMa);
         if(result != 0 && result > 0 ){
@@ -67,11 +70,39 @@ public class EmployeeTest {
     }
     @Test
     public void testDeleteEmployee(){
-        long result = employeeService.deleteEmployee(employeeNumber);
+        long result = employeeService.deleteEmployee((long) 15154);
         if(result == 1 ){
             log.info("删除成功！返回"+result);
         }else{
             log.error("删除失败！不存在此数据或出现错误！");
         }
     }
+    @Test
+    public void queryLAWD(){
+        Department department = employeeService.queryLAWD();
+        if(department != null ){
+            log.info("查询成功！返回"+department);
+        }else{
+            log.error("查询失败！不存在此数据或出现错误！");
+        }
+    }
+    @Test
+    public void queryLAWDByBetterSQL(){
+        Department department = employeeService.queryLAWDByBetterSQL();
+        if(department != null ){
+            log.info("查询成功！返回"+department);
+        }else{
+            log.error("查询失败！不存在此数据或出现错误！");
+        }
+    }
+    @Test
+    public void queryLAWDByBetterSQLUsingRedis(){
+        CommonResult department = employeeController.queryLAWDByBetterSQLUsingRedis();
+        if(department != null ){
+            log.info("查询成功！返回"+department);
+        }else{
+            log.error("查询失败！不存在此数据或出现错误！");
+        }
+    }
+
 }

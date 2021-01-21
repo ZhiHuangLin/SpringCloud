@@ -1,7 +1,10 @@
 package com.wecon.springcloud.service;
 
+import com.wecon.springcloud.entities.CommonResult;
+import com.wecon.springcloud.entities.Department;
 import com.wecon.springcloud.entities.Employee;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * @author zhl
@@ -34,4 +37,15 @@ public interface EmployeeService {
      * @return
      */
     Employee getEmployee(Long id);
+    /**
+     *查询平均工资最低的部门LAWD（Lowest Average Wage Department）信息
+     * @return
+     */
+    Department queryLAWD();
+    /**
+     *查询平均工资最低的部门LAWD（Lowest Average Wage Department）信息用更好的SQL
+     * @return
+     */
+    Department queryLAWDByBetterSQL();
+
 }
