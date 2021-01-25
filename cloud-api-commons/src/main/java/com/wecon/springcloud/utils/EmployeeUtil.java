@@ -84,7 +84,7 @@ public class EmployeeUtil {
      * @return
      */
     public static long getSalary() {
-        return (long)new Random().nextInt(8200) + 1800;
+        return new Random().nextInt(8200) + 1800;
     }
 
     /**
@@ -117,7 +117,7 @@ public class EmployeeUtil {
      * @return
      */
     private static long random(long begin, long end) {
-        long rtn = begin + (long) (Math.random() * (end - begin));
+        long rtn = (long) (begin +  (Math.random() * (end - begin)));
 
         if (rtn == begin || rtn == end) {
             return random(begin, end);
@@ -130,7 +130,7 @@ public class EmployeeUtil {
      * @return
      */
     public static String getEmail() {
-        return (long)new Random().nextInt(10000000) + 19999999 +"@qq.com";
+        return new Random().nextInt(10000000) + 19999999 +"@qq.com";
     }
 
     /**
@@ -138,7 +138,7 @@ public class EmployeeUtil {
      * @return
      */
     public static String getPhone_number() {
-        return (long)new Random().nextInt(1800000000) + 189999999 +"";
+        return new Random().nextInt(1800000000) + 189999999 +"";
     }
 
 
@@ -147,9 +147,9 @@ public class EmployeeUtil {
      * @return
      */
     public static Long getDepartmentAndJob_id() {
-        Long [] arr = {(long)10,(long)20,(long)30,(long)40,(long)50,(long)60,(long)70,(long)80,(long)90,(long)100,
-                (long)110,(long)120,(long)130,(long)140,(long)150,(long)160,(long)170,(long)180,(long)190,(long)200,
-                (long)210,(long)220,(long)220,(long)230,(long)240,(long)250,(long)260,(long)270};
+        Long [] arr = {10L,20L,30L,40L,50L,60L,70L,80L,90L,100L,
+                110L,120L,130L,140L,150L,160L,170L,180L,190L,200L,
+                210L,220L,220L,230L,240L,250L,260L,270L};
         int index=(int)(Math.random()*arr.length);
         return arr[index];
     }

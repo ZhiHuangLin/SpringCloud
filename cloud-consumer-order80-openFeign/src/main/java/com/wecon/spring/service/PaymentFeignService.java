@@ -49,6 +49,14 @@ public interface PaymentFeignService {
     CommonResult addEmployee(Employee employee);
 
     /**
+     * 添加用户
+     * @param integer
+     * @return
+     */
+    @PostMapping("/batchAddEmployee/{integer}")
+    CommonResult batchAddEmployee(@PathVariable("integer") Integer integer);
+
+    /**
      * 修改用户信息
      * @param employee
      * @return

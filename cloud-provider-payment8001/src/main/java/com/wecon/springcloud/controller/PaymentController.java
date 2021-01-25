@@ -2,6 +2,7 @@ package com.wecon.springcloud.controller;
 
 import com.wecon.springcloud.entities.CommonResult;
 import com.wecon.springcloud.entities.Payment;
+import com.wecon.springcloud.entities.StatusCode;
 import com.wecon.springcloud.service.PaymentService;
 import com.wecon.springcloud.service.impl.PaymentServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -35,9 +36,9 @@ public class PaymentController {
         int result = paymentService.create(payment);
         log.info("***插入结果***"+result);
         if(result > 0){
-            return new CommonResult(200,"插入数据成功，服务端口："+serverPort,result);
+            return new CommonResult(StatusCode.Success,"插入数据成功，服务端口："+serverPort,result);
         }else{
-            return new CommonResult(404,"插入数据失败",null);
+            return new CommonResult(StatusCode.Error,"插入数据失败",null);
         }
     }
 
@@ -46,9 +47,9 @@ public class PaymentController {
         Payment payment = paymentService.getPaymentById(id);
         log.info("***查询结果***"+payment);
         if(payment != null){
-            return new CommonResult(200,"查询数据成功，服务端口："+serverPort,payment);
+            return new CommonResult(StatusCode.Success,"查询数据成功，服务端口："+serverPort,payment);
         }else{
-            return new CommonResult(404,"没有对应的记录，查询ID："+id,null);
+            return new CommonResult(StatusCode.Error,"没有对应的记录，查询ID："+id,null);
         }
     }
 

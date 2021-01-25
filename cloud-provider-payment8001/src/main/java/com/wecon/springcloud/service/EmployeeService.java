@@ -1,10 +1,10 @@
 package com.wecon.springcloud.service;
 
-import com.wecon.springcloud.entities.CommonResult;
 import com.wecon.springcloud.entities.Department;
 import com.wecon.springcloud.entities.Employee;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 /**
  * @author zhl
@@ -19,6 +19,12 @@ public interface EmployeeService {
      * @return
      */
     int addEmployee(Employee employee);
+    /**
+     * 批量添加员工
+     * @param list
+     * @return
+     */
+    int batchAddEmployee(List<Employee> list);
     /**
      * 修改员工
      * @param employee
@@ -47,5 +53,4 @@ public interface EmployeeService {
      * @return
      */
     Department queryLAWDByBetterSQL();
-
 }

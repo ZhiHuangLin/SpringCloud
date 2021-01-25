@@ -2,6 +2,7 @@ package com.wecon.springcloud.controller;
 
 import com.wecon.springcloud.entities.CommonResult;
 import com.wecon.springcloud.entities.Payment;
+import com.wecon.springcloud.entities.StatusCode;
 import com.wecon.springcloud.lb.LoadBalancer;
 import com.wecon.springcloud.lb.impl.MyLoadBalancer;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +50,7 @@ public class OrderController {
         if(entity.getStatusCode().is2xxSuccessful()){
             return entity.getBody();
         }else{
-            return new CommonResult<>(404,"操作失败！");
+            return new CommonResult(StatusCode.Error,"操作失败！",null);
         }
     }
     @GetMapping("/consumer/payment/lb")

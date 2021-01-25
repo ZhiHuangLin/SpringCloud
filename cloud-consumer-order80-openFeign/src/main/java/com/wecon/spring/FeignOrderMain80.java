@@ -1,6 +1,7 @@
 package com.wecon.spring;
 
 import com.netflix.loadbalancer.RandomRule;
+import com.netflix.loadbalancer.WeightedResponseTimeRule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
@@ -15,8 +16,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients
 @EnableHystrix
-@RibbonClient(name = "CLOUD-PAYMENT-SERVICE",configuration = RandomRule.class)
-public class FeignOrderMain83 {
+@RibbonClient(name = "CLOUD-PAYMENT-SERVICE",configuration = WeightedResponseTimeRule.class)
+public class FeignOrderMain80 {
     public static void main(String[] args) {
-        SpringApplication.run(FeignOrderMain83.class,args); }
+        SpringApplication.run(FeignOrderMain80.class,args); }
 }

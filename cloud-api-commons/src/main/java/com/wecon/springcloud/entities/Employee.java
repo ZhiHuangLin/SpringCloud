@@ -56,7 +56,10 @@ public class Employee {
      */
     private Long department_id;
     /**
-     * 管理号
+     * 单例模式
      */
-    private Long manager_id;
+    private static Employee instance = new Employee();
+    public static Employee getInstance() {
+        return instance;
+    }
 }

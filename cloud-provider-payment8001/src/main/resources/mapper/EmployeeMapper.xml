@@ -14,7 +14,6 @@
         <id column="job_id" property="job_id" jdbcType="VARCHAR"/>
         <id column="salary" property="salary" jdbcType="BIGINT"/>
         <id column="department_id" property="department_id" jdbcType="BIGINT"/>
-        <id column="manager_id" property="manager_id" jdbcType="BIGINT"/>
     </resultMap>
 
     <resultMap id="DepartmentMap" type="com.wecon.springcloud.entities.Department">
@@ -25,9 +24,19 @@
     </resultMap>
 
     <insert id="addEmployee" parameterType="com.wecon.springcloud.entities.Employee" useGeneratedKeys="true" keyProperty="employee_id">
-    INSERT INTO Employee(employee_id,name,age,sex,email,phone_number,joinUsDate,job_id,salary,department_id,manager_id)
-         VALUES (#{employee_id},#{name},#{age},#{sex},#{email},#{phone_number},#{joinUsDate},#{job_id},#{salary},#{department_id},#{manager_id})
+    INSERT INTO Employee(employee_id,name,age,sex,email,phone_number,joinUsDate,job_id,salary,department_id)
+         VALUES (#{employee_id},#{name},#{age},#{sex},#{email},#{phone_number},#{joinUsDate},#{job_id},#{salary},#{department_id})
     </insert>
+
+    <insert id="batchAddEmployee" parameterType="java.util.List">
+    INSERT INTO Employee(employee_id,name,age,sex,email,phone_number,joinUsDate,job_id,salary,department_id)
+    VALUES
+    <foreach collection ="list" item="employee" index= "index" separator =",">
+    (#{employee.employee_id},#{employee.name},#{employee.age},#{employee.sex},#{employee.email},#{employee.phone_number},#{employee.joinUsDate},#{employee.job_id},#{employee.salary},#{employee.department_id})
+    </foreach>
+    </insert>
+
+
     <delete id="deleteEmployee" parameterType="long" >
     DELETE FROM Employee WHERE employee_id = #{employee_id}
     </delete>
@@ -43,8 +52,7 @@
             Employee.joinUsDate = #{joinUsDate},
             Employee.job_id = #{job_id},
             Employee.salary = #{salary},
-            Employee.department_id = #{department_id},
-            Employee.manager_id = #{manager_id}
+            Employee.department_id = #{department_id}
       WHERE Employee.employee_id = #{employee_id}
     </update>
 

@@ -7,6 +7,8 @@ import com.wecon.springcloud.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * @author zhl
  * @create 2021/1/13 10:48
@@ -21,6 +23,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public int addEmployee(Employee employee) {
         return employeeDao.addEmployee(employee);
+    }
+
+    @Override
+    public int batchAddEmployee(List<Employee> list) {
+        return employeeDao.batchAddEmployee(list);
     }
 
     @Override

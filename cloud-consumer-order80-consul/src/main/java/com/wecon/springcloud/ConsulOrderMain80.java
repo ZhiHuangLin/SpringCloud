@@ -11,8 +11,8 @@ import org.springframework.cloud.client.SpringCloudApplication;
  */
 @SpringCloudApplication
 @Slf4j
-public class ConsulOrderMain82 {
+public class ConsulOrderMain80 {
     public static void main(String[] args) {
-        SpringApplication.run(ConsulOrderMain82.class,args);
+        SpringApplication.run(ConsulOrderMain80.class,args);
     }
 }
