@@ -1,13 +1,12 @@
-package com.wecon.spring.service;
+package com.wecon.springcloud.service;
 
-import com.wecon.spring.service.impl.PaymentFeignServiceImpl;
 import com.wecon.springcloud.entities.CommonResult;
 import com.wecon.springcloud.entities.Employee;
 import com.wecon.springcloud.entities.Payment;
+import com.wecon.springcloud.service.impl.PaymentFeignServiceImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
-
 
 
 /**

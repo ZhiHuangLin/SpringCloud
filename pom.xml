@@ -22,6 +22,10 @@
         <module>cloud-provider-payment8001-hystrix</module>
         <module>cloud-consumer-order80-feign-hystrix</module>
         <module>cloud-consumer-dashboard9001-hystrix</module>
+        <module>v-box-sidecar</module>
+        <module>cloud-gateway-gateway9527</module>
+        <module>cloud-config-center-3344</module>
+        <module>cloud-config-client-3355</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -102,6 +106,13 @@
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+
+          <!--  <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <scope>runtime</scope>
+                <optional>true</optional>
+            </dependency>-->
         </dependencies>
     </dependencyManagement>
  <!--   <build>

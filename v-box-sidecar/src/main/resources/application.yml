@@ -1,0 +1,21 @@
+spring:
+  application:
+    #服务名
+    name: v-box-sidecar
+server:
+  port: 8070
+eureka:
+  instance:
+    instance-id: v-box-sidecar
+    prefer-ip-address: true
+  client:
+    service-url:
+      register-with-eureka: true
+      fetch-registry: true
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+
+sidecar:
+  #异构微服务的端口
+  port: 8080
+  #对应第三方程序的health接口
+  healthUri: http://localhost:8080/box-web/api/hmiDataAction/filedownloadHealth
