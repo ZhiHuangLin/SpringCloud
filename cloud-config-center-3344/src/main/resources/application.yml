@@ -5,14 +5,26 @@ spring:
     name: cloud-config-center
   cloud:
     config:
+      label: main
       server:
         git:
           uri: https://github.com/ZhiHuangLin/SpringCloudConfig.git
           search-paths:
             - SpringCloudConfig
-      label: main
+
 eureka:
   client:
     service-url:
       defaultZone:  http://localhost:7001/eureka
 
+rabbitmq:
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'bus-refresh'

@@ -3,7 +3,7 @@ package com.wecon.springcloud.service;
 import com.wecon.springcloud.entities.CommonResult;
 import com.wecon.springcloud.entities.Employee;
 import com.wecon.springcloud.entities.Payment;
-import com.wecon.springcloud.service.impl.PaymentFeignServiceImpl;
+import com.wecon.springcloud.service.impl.PaymentFeignServiceFallbackImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * @description
  */
 @Component
-@FeignClient(value = "CLOUD-PAYMENT-SERVICE",fallback = PaymentFeignServiceImpl.class)
+@FeignClient(value = "CLOUD-PAYMENT-SERVICE",fallback = PaymentFeignServiceFallbackImpl.class)
 public interface PaymentFeignService {
 
     /**

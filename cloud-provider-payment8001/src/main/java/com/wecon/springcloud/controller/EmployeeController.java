@@ -186,5 +186,4 @@ public class EmployeeController {
             return  new CommonResult(StatusCode.Success,"从数据库中查询平均工资最低的部门信息成功，服务端口："+serverPort+",返回数据：",department);
         }
     }
-
 }

@@ -8,15 +8,16 @@ import java.util.Scanner;
 
 /**
  * @author zhl
- * @create 2021/2/1 15:36
+ * @create 2021/2/3 10:51
  * @description
  */
 @SpringBootApplication
-public class ConfigClientMain3355 {
+public class StreamMQMain8802 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("请输入端口号：");
+        System.out.println("请依次输入端口号和RabbitMQ分组：");
         String port = scanner.nextLine();
-        new SpringApplicationBuilder(ConfigClientMain3355.class).properties("server.port="+port).run(args);
+        String group = scanner.nextLine();
+        new SpringApplicationBuilder(StreamMQMain8802.class).properties("server.port="+port,"spring.cloud.stream.bindings.input.group="+group).run(args);
     }
 }
