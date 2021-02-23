@@ -9,12 +9,13 @@ spring:
   sleuth:
     sampler:
       probability: 1
+
 eureka:
   client:
     service-url:
       register-with-eureka: true
       fetch-registry: true
-      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
   instance:
     instance-id: cloud-consumer-order80
     prefer-ip-address: true

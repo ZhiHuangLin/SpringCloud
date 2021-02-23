@@ -1,4 +1,4 @@
-package com.wecon.spring.annotation;
+package com.wecon.springcloud.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

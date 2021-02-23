@@ -1,9 +1,7 @@
 package com.wecon.spring.controller;
 
-import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
-import com.wecon.spring.annotation.LimitKey;
 import com.wecon.spring.service.PaymentFeignService;
 import com.wecon.springcloud.entities.CommonResult;
 import com.wecon.springcloud.entities.Employee;
@@ -17,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author zhl
  * @create 2021/1/14 11:09
- * @description
+ * @descriptionCon
  */
 @RestController
 @Slf4j
@@ -60,9 +58,22 @@ public class EmployeeFeignController {
      */
     @PostMapping("/addEmployee")
     public CommonResult addEmployee(Employee employee){
-        return paymentFeignService.addEmployee(employee);
+        if(employee != null) {
+            return paymentFeignService.addEmployee(employee);
+        }else{
+            return new CommonResult(StatusCode.Error,"传入的参数为空！",employee);
+        }
     }
-
+//    @RequestParam("employee_id")Long id,
+//    @RequestParam("name")String name,
+//    @RequestParam("age")Long age,
+//    @RequestParam("sex")String sex,
+//    @RequestParam("email")String email,
+//    @RequestParam("phone_number")String phone_number,
+//    @RequestParam("joinUsDate") Date joinUsDate,
+//    @RequestParam("job_id")Long job_id,
+//    @RequestParam("salary")Long salary,
+//    @RequestParam("department_id")Long department_id)
     /**
      * 批量添加用户
      * @param integer
@@ -113,7 +124,7 @@ public class EmployeeFeignController {
             @HystrixProperty(name = "circuitBreaker.enabled",value = "true"),
             //请求次数
             @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold",value = "10"),
-            //时间范围
+            //休眠时间范围
             @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds",value = "10000"),
             //失败率达到多少后跳闸
             @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage",value = "60")
@@ -124,24 +135,23 @@ public class EmployeeFeignController {
     }
 
     public CommonResult paymentCircuitBreaker_fallback(@PathVariable Integer id){
-        return new CommonResult(StatusCode.Error,"查询超时或出现异常，短时间内多次访问出错将进行服务熔断处理！请稍后再试！",null);
+        return new CommonResult(StatusCode.Error,"查询出错或出现异常，短时间内多次访问出错将进行服务熔断处理！请稍后再试！",null);
     }
     /**
      * 查询平均工资最低的部门LAWD（Lowest Average Wage Department）信息用更好的SQL并使用redis
      * @return
      */
     @GetMapping("/queryLAWDByBetterSQLUsingRedis")
-//    @LimitKey(methodName = "queryLAWDByBetterSQLUsingRedis",url = "http://localhost/queryLAWDByBetterSQLUsingRedis")
-/*    @HystrixCommand(fallbackMethod = "TimeOutFallbackMethod",commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "15")})*/ //假设15毫秒钟以内就是正常的业务逻辑
+    @HystrixCommand(fallbackMethod = "TimeOutFallbackMethod",commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "2000")}) //假设15毫秒钟以内就是正常的业务逻辑
     public CommonResult queryLAWDByBetterSQLUsingRedis(){
-      /*     //sleep三秒钟
+           //sleep三秒钟
         Integer timeNumber = 3;
         try {
             TimeUnit.SECONDS.sleep(timeNumber);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
 
         return paymentFeignService.queryLAWDByBetterSQLUsingRedis();
     }

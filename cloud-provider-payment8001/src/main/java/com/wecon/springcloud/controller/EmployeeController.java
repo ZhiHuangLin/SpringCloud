@@ -1,5 +1,6 @@
 package com.wecon.springcloud.controller;
 
+import com.wecon.springcloud.annotation.LimitKey;
 import com.wecon.springcloud.entities.Department;
 import com.wecon.springcloud.entities.Employee;
 import com.wecon.springcloud.entities.CommonResult;
@@ -165,6 +166,7 @@ public class EmployeeController {
      * 查询平均工资最低的部门LAWD（Lowest Average Wage Department）信息用更好的SQL并使用redis
      * @return
      */
+    @LimitKey(methodName = "queryLAWDByBetterSQLUsingRedis",url = "http://localhost:8001/queryLAWDByBetterSQLUsingRedis")
     @GetMapping("/queryLAWDByBetterSQLUsingRedis")
     public CommonResult queryLAWDByBetterSQLUsingRedis(){
         //查询缓存中是否存在
@@ -174,6 +176,9 @@ public class EmployeeController {
         if(hasKey){
             //获取缓存
             Object object = redisUtils.get(id);
+            if(object == null){
+                redisUtils.remove(id);
+            }
             log.info("从缓存获取的数据"+ object);
             return  new CommonResult(StatusCode.Success,"从缓存中查询平均工资最低的部门信息成功，服务端口："+serverPort+",返回数据：",object);
         }else{

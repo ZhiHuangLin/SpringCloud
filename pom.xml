@@ -28,6 +28,8 @@
         <module>cloud-config-client-3355</module>
         <module>cloud-stream-rabbitmq-provider8801</module>
         <module>cloud-stream-rabbitmq-consumer8802</module>
+        <module>v-box-hisData</module>
+        <module>v-box-api</module>
     </modules>
     <packaging>pom</packaging>
 

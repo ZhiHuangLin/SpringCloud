@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @description 统一fallback接口实现类
  */
 @Component
-public class PaymentFeignServiceImpl implements PaymentFeignService {
+public class PaymentFeignServiceFallbackImpl implements PaymentFeignService {
     @Override
     public CommonResult<Payment> getPaymentById(Long id) {
         return new CommonResult(StatusCode.Error,"查询超时或出现异常，这里是Hystrix的服务降级处理，请稍后再试！",null);

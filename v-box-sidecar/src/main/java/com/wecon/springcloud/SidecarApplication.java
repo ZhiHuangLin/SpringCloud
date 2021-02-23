@@ -19,7 +19,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableSidecar
 @EnableFeignClients
 @EnableHystrix
-@RibbonClient(name = "CLOUD-PAYMENT-SERVICE",configuration = WeightedResponseTimeRule.class)
 public class SidecarApplication {
     public static void main(String[] args) {
         SpringApplication.run(SidecarApplication.class, args);

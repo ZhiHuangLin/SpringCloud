@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: v-box-hisData
+eureka:
+  client:
+    service-url:
+      register-with-eureka: true
+      fetch-registry: true
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+  instance:
+    instance-id: v-box-hisData
+    prefer-ip-address: true
+    status-page-url: http://localhost:${server.port}/swagger-ui.html
+
+server:
+  port: 8077
+

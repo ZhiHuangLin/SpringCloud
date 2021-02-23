@@ -8,12 +8,12 @@ eureka:
   instance:
     instance-id: v-box-sidecar
     prefer-ip-address: true
+    status-page-url: http://localhost:${server.port}/swagger-ui.html
   client:
     service-url:
       register-with-eureka: true
       fetch-registry: true
       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
-
 sidecar:
   #异构微服务的端口
   port: 8080

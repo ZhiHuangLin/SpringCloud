@@ -2,19 +2,22 @@ server:
   port: 80
   tomcat:
     #最大并发数
-    max-threads: 4
+    max-threads: 1
     #接受和处理的最大连接数
-    max-connections: 4
+    max-connections: 1
     #初始化时创建的线程数
-    min-spare-threads: 4
+    min-spare-threads: 1
     #可以放到处理队列中的请求数
-    accept-count: 4
+    accept-count: 1
 eureka:
   client:
-    register-with-eureka: false
     service-url:
-      defaultZone: http://eureka7001.com:7001/eureka, http://eureka7002.com:7002/eureka
-
+      register-with-eureka: true
+      fetch-registry: true
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+  instance:
+    instance-id: cloud-consumer-order80
+    prefer-ip-address: true
 
 feign:
   hystrix:
@@ -23,4 +26,15 @@ feign:
 Logging:
   level:
     com.wecon.spring.service.PaymentFeignService: debug
-
+spring:
+  auto:
+    openUrl: true
+  web:
+    index: http://localhost/index.html
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      probability: 1
+  application:
+    name: feign-cloud-order-consumer

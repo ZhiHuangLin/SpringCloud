@@ -20,7 +20,7 @@ eureka:
     service-url:
       register-with-eureka: true
       fetch-registry: true
-      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+      defaultZone: http://localhost:7001/eureka/,http://localhost.com:7002/eureka/
   instance:
     instance-id: cloud-provider-payment8002
     prefer-ip-address: true

@@ -1,4 +1,4 @@
-package com.wecon.spring.annotation;
+package com.wecon.springcloud.annotation;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,19 +7,6 @@ import java.util.TimerTask;
 
 import com.wecon.springcloud.entities.CommonResult;
 import com.wecon.springcloud.entities.StatusCode;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
